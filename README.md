@@ -24,6 +24,3 @@ When you use this work for please cite the following:
 
 ## GB10 / DGX Spark
 Candidate tests for `requires unified_shared_memory`: [platforms/gb10/](platforms/gb10/README.md)
-
-## GB10 / DGX Spark
-Candidate tests for `requires unified_shared_memory`: [platforms/gb10/](platforms/gb10/README.md)
