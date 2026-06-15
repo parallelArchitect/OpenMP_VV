@@ -21,3 +21,6 @@ When you use this work for please cite the following:
   pages={123-135},
   doi={10.1109/P3HPC56579.2022.00017}}
 
+
+## GB10 / DGX Spark
+Candidate tests for `requires unified_shared_memory`: [platforms/gb10/](platforms/gb10/README.md) — branch: `gb10-uma-aware`
