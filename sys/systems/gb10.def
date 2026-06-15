@@ -1,0 +1,55 @@
+# Definitions for NVIDIA GB10 / DGX Spark (AArch64, SM 12.1)
+# Pending validation on GB10 hardware.
+#
+# NVIDIA HPC SDK compilers:
+#   nvc, nvc++, nvfortran
+#
+# OpenMP target offload flags are configured for SM 12.1.
+
+$(info "Including gb10.def file")
+
+#---------------------------------------------------------------------------
+# BATCH Scheduler
+#---------------------------------------------------------------------------
+BATCH_SCHEDULER =
+CUDA_MODULE ?=
+
+#---------------------------------------------------------------------------
+# CUDA installation
+#---------------------------------------------------------------------------
+CUDA_HOME ?= /usr/local/cuda-13.0
+
+#---------------------------------------------------------------------------
+# C compilers
+#---------------------------------------------------------------------------
+CCOMPILERS="nvc"
+
+ifeq ($(CC), nvc)
+  C_COMPILER_MODULE ?=
+  C_VERSION ?= nvc --version 2>&1 | head -1
+  CFLAGS ?= -mp=gpu -gpu=cc121 -cuda -I$(CUDA_HOME)/include
+  LDFLAGS ?= -mp=gpu -gpu=cc121 -cuda -L$(CUDA_HOME)/lib64 -lcudart
+endif
+
+#---------------------------------------------------------------------------
+# C++ compilers
+#---------------------------------------------------------------------------
+CXXCOMPILERS="nvc++"
+
+ifeq ($(CXX), nvc++)
+  CXX_COMPILER_MODULE ?=
+  CXX_VERSION ?= nvc++ --version 2>&1 | head -1
+  CXXFLAGS ?= -mp=gpu -gpu=cc121 -cuda -I$(CUDA_HOME)/include
+  LDFLAGS ?= -mp=gpu -gpu=cc121 -cuda -L$(CUDA_HOME)/lib64 -lcudart
+endif
+
+#---------------------------------------------------------------------------
+# Fortran compilers
+#---------------------------------------------------------------------------
+FCOMPILERS="nvfortran"
+
+ifeq ($(FC), nvfortran)
+  F_COMPILER_MODULE ?=
+  F_VERSION ?= nvfortran --version 2>&1 | head -1
+  FFLAGS ?= -mp=gpu -gpu=cc121 -cuda
+endif
